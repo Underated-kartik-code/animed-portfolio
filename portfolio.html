@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kartik Alokar | Portfolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+  :root {
+    --primary-color: #4e54c8;
+    --secondary-color: #8f94fb;
+    --accent-color1: #ff6584;
+    --accent-color2: #f9a825;
+    --bg-color: #1e1e2f;
+    --text-color: #eaeaea;
+    --shadow-color: rgba(0,0,0,0.3);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+  }
+
+  /* Scrollbar style */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #333444;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+  }
+
+  a {
+    color: var(--accent-color1);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  a:hover {
+    color: var(--secondary-color);
+  }
+
+  /* Updated header style - smaller height, focused content, movable flashing name */
+  header {
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 0 20px;
+    position: relative;
+    overflow: visible;
+    user-select: none;
+  }
+
+  /* Removed previous background shapes and overlays from header for clarity */
+  header::before {
+    content: none;
+  }
+
+  /* Floating container for name to enable smooth movement */
+  .name-container {
+    position: relative;
+    display: inline-block;
+    animation: floatMove 6s ease-in-out infinite;
+  }
+
+  /* Flashing gradient text effect */
+  .flashing-name {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    background: linear-gradient(270deg, #ff6584, #f9a825, #8f94fb, #4e54c8);
+    background-size: 800% 800%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+            background-clip: text;
+    animation: gradientShift 8s ease infinite;
+    text-shadow:
+      0 0 5px rgba(255, 101, 132, 0.7),
+      0 0 10px rgba(249, 168, 37, 0.7),
+      0 0 20px rgba(143, 148, 251, 0.7);
+  }
+
+  /* Contact Me button style */
+  .btn-primary {
+    margin-top: 20px;
+    padding: 12px 38px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 35px;
+    background: linear-gradient(45deg, var(--accent-color1), var(--secondary-color));
+    color: white;
+    cursor: pointer;
+    box-shadow:
+      0 5px 15px rgba(255,101,132,0.6);
+    transition: all 0.4s ease;
+    user-select: none;
+  }
+  .btn-primary:hover, .btn-primary:focus {
+    background: var(--accent-color1);
+    box-shadow:
+      0 8px 20px rgba(255,101,132,0.9);
+    transform: scale(1.05);
+    outline: none;
+  }
+
+  /* Floating movement animation for name container */
+  @keyframes floatMove {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(15px, -12px); }
+    50% { transform: translate(-10px, 10px); }
+    75% { transform: translate(10px, 8px); }
+  }
+
+  /* Gradient color shift animation */
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Main content margin adjustment since header is smaller */
+  main {
+    max-width: 900px;
+    margin: 40px auto 50px auto;
+    padding: 0 20px 40px 20px;
+    background: rgba(30, 30, 47, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 5px 30px var(--shadow-color);
+  }
+
+  section {
+    margin-bottom: 60px;
+  }
+
+  section h2 {
+    font-size: 2.4rem;
+    border-left: 6px solid var(--accent-color1);
+    padding-left: 12px;
+    margin-bottom: 20px;
+    color: var(--accent-color1);
+    position: relative;
+  }
+
+  section h2::after {
+    content: "";
+    position: absolute;
+    height: 3px;
+    width: 40px;
+    background: linear-gradient(90deg, var(--accent-color1), var(--secondary-color));
+    bottom: -8px;
+    left: 0;
+    border-radius: 4px;
+  }
+
+  /* About */
+  #about p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #ddd;
+  }
+  
+  /* Skills */
+  .skill {
+    margin-bottom: 25px;
+  }
+  .skill-name {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--secondary-color);
+  }
+  .skill-bar {
+    width: 100%;
+    height: 12px;
+    background: #33344d;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .skill-progress {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--accent-color1), var(--secondary-color));
+    border-radius: 8px;
+    animation: growBar 2s forwards;
+  }
+  @keyframes growBar {
+    to { width: var(--progress); }
+  }
+
+  /* Projects */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    gap: 20px;
+  }
+  .project-card {
+    background: #2a2a43;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    padding: 20px;
+    color: #eee;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    perspective: 600px;
+    transition: transform 0.4s ease;
+  }
+  .project-card:hover {
+    transform: rotateY(10deg) scale(1.05);
+    box-shadow:
+      0 15px 30px rgba(255,101,132,0.5),
+      0 0 15px rgba(255,101,132,0.3);
+  }
+  .project-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .project-desc {
+    font-size: 0.95rem;
+    color: #bbb;
+    line-height: 1.3;
+  }
+  .project-link {
+    margin-top: 12px;
+    font-size: 0.9rem;
+    color: var(--accent-color1);
+    font-weight: 600;
+    display: inline-block;
+    transition: color 0.3s ease;
+  }
+  .project-link:hover {
+    color: var(--secondary-color);
+  }
+
+  /* Project Skills */
+  #project-skills {
+    margin-top: 30px;
+  }
+  .project-skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+  }
+  .skill-badge {
+    background: linear-gradient(135deg, var(--accent-color1), var(--secondary-color));
+    color: white;
+    font-weight: 600;
+    padding: 12px 22px;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(255,101,132,0.7);
+    cursor: default;
+    font-size: 1rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    user-select: none;
+  }
+  .skill-badge:hover {
+    transform: scale(1.15);
+    box-shadow: 0 10px 25px rgba(255,101,132,1);
+  }
+
+  /* Contact */
+  #contact form {
+    display: flex;
+    flex-direction: column;
+  }
+  #contact label {
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: var(--secondary-color);
+  }
+  #contact input, #contact textarea {
+    padding: 12px 16px;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    margin-bottom: 20px;
+    background-color: #33344d;
+    color: white;
+    resize: vertical;
+    box-shadow:
+      inset 0 0 8px #222233;
+    transition: background-color 0.3s ease;
+  }
+  #contact input:focus, #contact textarea:focus {
+    background-color: #444462;
+    box-shadow:
+      inset 0 0 12px var(--accent-color1);
+  }
+  #contact button {
+    padding: 14px 0;
+    background: linear-gradient(45deg, var(--accent-color1), var(--secondary-color));
+    border: none;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 35px;
+    cursor: pointer;
+    box-shadow:
+      0 5px 15px rgba(255,101,132,0.6);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  #contact button:hover, #contact button:focus {
+    box-shadow:
+      0 10px 25px rgba(255,101,132,0.9);
+    transform: scale(1.05);
+    outline: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    header {
+      height: 140px;
+    }
+    .flashing-name {
+      font-size: 2.5rem;
+    }
+    main {
+      margin: 20px 10px 50px 10px;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    section h2 {
+      font-size: 1.8rem;
+    }
+    .project-skills-container {
+      gap: 12px;
+    }
+    .skill-badge {
+      font-size: 0.9rem;
+      padding: 10px 18px;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="name-container" aria-label="Name Kartik Alokar">
+    <h1 class="flashing-name" tabindex="0">Kartik Alokar</h1>
+  </div>
+  <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" aria-label="Scroll to contact section">Contact Me</button>
+</header>
+
+<main>
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Hello! I'm Kartik Alokar, a passionate frontend developer and designer who loves crafting beautiful, interactive websites. With a keen eye for detail and a love for modern design, I bring ideas to life with clean code and vibrant visuals.</p>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skill">
+      <div class="skill-name">HTML &amp; CSS</div>
+      <div class="skill-bar"><div class="skill-progress" style="--progress:90%;"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">JavaScript &amp; ES6+</div>
+      <div class="skill-bar"><div class="skill-progress" style="--progress:85%;"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">Responsive Design</div>
+      <div class="skill-bar"><div class="skill-progress" style="--progress:95%;"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">CSS Animations &amp; Transitions</div>
+      <div class="skill-bar"><div class="skill-progress" style="--progress:90%;"></div></div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card" tabindex="0" aria-label="Project 1 - Interactive Portfolio Website">
+        <div class="project-title">Interactive Portfolio</div>
+        <div class="project-desc">A dynamic single-page portfolio with smooth animations and responsive layout showcasing my skills.</div>
+        <a href="#" class="project-link" target="_blank" rel="noopener">View Project</a>
+      </div>
+      <div class="project-card" tabindex="0" aria-label="Project 2 - E-commerce Landing Page Design">
+        <div class="project-title">E-commerce Landing Page</div>
+        <div class="project-desc">A modern, clean landing page for an e-commerce site featuring seamless user interaction and calls to action.</div>
+        <a href="#" class="project-link" target="_blank" rel="noopener">View Project</a>
+      </div>
+      <div class="project-card" tabindex="0" aria-label="Project 3 - CSS Animation Showcase">
+        <div class="project-title">CSS Animation Showcase</div>
+        <div class="project-desc">A collection of creative CSS animations demonstrating advanced keyframe techniques and user interactivity.</div>
+        <a href="#" class="project-link" target="_blank" rel="noopener">View Project</a>
+      </div>
+    </div>
+
+    <section id="project-skills" aria-label="Project Skills">
+      <h2>Project Skills</h2>
+      <div class="project-skills-container" role="list">
+        <div class="skill-badge" role="listitem">React</div>
+        <div class="skill-badge" role="listitem">Vue.js</div>
+        <div class="skill-badge" role="listitem">GSAP</div>
+        <div class="skill-badge" role="listitem">Figma</div>
+        <div class="skill-badge" role="listitem">Webpack</div>
+        <div class="skill-badge" role="listitem">TypeScript</div>
+        <div class="skill-badge" role="listitem">Sass</div>
+      </div>
+    </section>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <form onsubmit="submitForm(event)">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Your full name" required />
+      
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Your email address" required />
+      
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" placeholder="Your message" required></textarea>
+      
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+</main>
+
+<script>
+  // Animate skill bars when in viewport
+  function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return rect.top <= (window.innerHeight || document.documentElement.clientHeight) && rect.bottom >= 0;
+  }
+
+  function animateSkills() {
+    const skills = document.querySelectorAll('.skill-progress');
+    skills.forEach(skill => {
+      if (isInViewport(skill) && !skill.classList.contains('animated')) {
+        skill.style.width = skill.style.getPropertyValue('--progress');
+        skill.classList.add('animated');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', animateSkills);
+  window.addEventListener('load', animateSkills);
+
+  // Handle contact form submission (simple client-side behavior)
+  function submitForm(event) {
+    event.preventDefault();
+    const name = event.target.name.value.trim();
+    const email = event.target.email.value.trim();
+    const message = event.target.message.value.trim();
+
+    if (name && email && message) {
+      alert(`Thank you, ${name}! Your message has been received.`);
+      event.target.reset();
+    } else {
+      alert('Please fill out all fields.');
+    }
+  }
+</script>
+</body>
+</html>
