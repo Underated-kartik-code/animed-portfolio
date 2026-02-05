@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="./style.css">
+<title>Kartik Alokar | Portfolio</title>
+</head>
+<body>
+<header>
+  <div class="name-container" aria-label="Name Kartik Alokar">
+    <h1 class="flashing-name" tabindex="0">Kartik Alokar</h1>
+  </div>
+  <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" aria-label="Scroll to contact section">Contact Me</button>
+</header>
+
+<main>
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Hello! I'm Kartik Alokar, a passionate frontend developer and designer who loves crafting beautiful, interactive websites. With a keen eye for detail and a love for modern design, I bring ideas to life with clean code and vibrant visuals.</p>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skill">
+      <div class="skill-name">HTML &amp; CSS</div>
+      <div class="skill-bar"><div class="skill-progress" style="--progress:90%;"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">JavaScript &amp; ES6+</div>
+      <div class="skill-bar"><div class="skill-progress" style="--progress:85%;"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">Responsive Design</div>
+      <div class="skill-bar"><div class="skill-progress" style="--progress:95%;"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">CSS Animations &amp; Transitions</div>
+      <div class="skill-bar"><div class="skill-progress" style="--progress:90%;"></div></div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card" tabindex="0" aria-label="Project 1 - Interactive Portfolio Website">
+        <div class="project-title">Interactive Portfolio</div>
+        <div class="project-desc">A dynamic single-page portfolio with smooth animations and responsive layout showcasing my skills.</div>
+        <a href="#" class="project-link" target="_blank" rel="noopener">View Project</a>
+      </div>
+      <div class="project-card" tabindex="0" aria-label="Project 2 - E-commerce Landing Page Design">
+        <div class="project-title">E-commerce Landing Page</div>
+        <div class="project-desc">A modern, clean landing page for an e-commerce site featuring seamless user interaction and calls to action.</div>
+        <a href="#" class="project-link" target="_blank" rel="noopener">View Project</a>
+      </div>
+      <div class="project-card" tabindex="0" aria-label="Project 3 - CSS Animation Showcase">
+        <div class="project-title">CSS Animation Showcase</div>
+        <div class="project-desc">A collection of creative CSS animations demonstrating advanced keyframe techniques and user interactivity.</div>
+        <a href="#" class="project-link" target="_blank" rel="noopener">View Project</a>
+      </div>
+    </div>
+
+    <section id="project-skills" aria-label="Project Skills">
+      <h2>Project Skills</h2>
+      <div class="project-skills-container" role="list">
+        <div class="skill-badge" role="listitem">React</div>
+        <div class="skill-badge" role="listitem">Vue.js</div>
+        <div class="skill-badge" role="listitem">GSAP</div>
+        <div class="skill-badge" role="listitem">Figma</div>
+        <div class="skill-badge" role="listitem">Webpack</div>
+        <div class="skill-badge" role="listitem">TypeScript</div>
+        <div class="skill-badge" role="listitem">Sass</div>
+      </div>
+    </section>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <form onsubmit="submitForm(event)">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Your full name" required />
+      
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Your email address" required />
+      
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" placeholder="Your message" required></textarea>
+      
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+</main>
+
+<script>
+  // Animate skill bars when in viewport
+  function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return rect.top <= (window.innerHeight || document.documentElement.clientHeight) && rect.bottom >= 0;
+  }
+
+  function animateSkills() {
+    const skills = document.querySelectorAll('.skill-progress');
+    skills.forEach(skill => {
+      if (isInViewport(skill) && !skill.classList.contains('animated')) {
+        skill.style.width = skill.style.getPropertyValue('--progress');
+        skill.classList.add('animated');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', animateSkills);
+  window.addEventListener('load', animateSkills);
+
+  // Handle contact form submission (simple client-side behavior)
+  function submitForm(event) {
+    event.preventDefault();
+    const name = event.target.name.value.trim();
+    const email = event.target.email.value.trim();
+    const message = event.target.message.value.trim();
+
+    if (name && email && message) {
+      alert(`Thank you, ${name}! Your message has been received.`);
+      event.target.reset();
+    } else {
+      alert('Please fill out all fields.');
+    }
+  }
+</script>
+</body>
